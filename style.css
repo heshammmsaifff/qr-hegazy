@@ -1,0 +1,253 @@
+/* ===== المتغيرات ===== */
+:root {
+  --bg: #12151a;
+  --card: #1b1f26;
+  --card-border: #2b313b;
+  --text: #eceff3;
+  --text-dim: #98a1af;
+  --isuzu: #e11d2a;      /* أحمر ISUZU */
+  --rbc: #f23440;        /* أحمر RBC */
+  --srs: #f5c518;        /* أصفر SRS */
+  --gold: #d7a63f;
+  --green: #25d366;      /* واتساب */
+  --blue: #4a90d9;
+  --radius: 8px;
+  --radius-sm: 5px;
+  --font: 'Cairo', 'Tajawal', system-ui, sans-serif;
+}
+
+/* ===== إعادة ضبط ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 18px;
+}
+
+/* شريط علوي بسيط بألوان الهوية */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--isuzu) 0 50%, var(--srs) 50% 100%);
+  z-index: 2;
+}
+
+/* ===== البطاقة ===== */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 34px 26px 22px;
+  text-align: center;
+  animation: card-in 0.55s cubic-bezier(0.22, 0.7, 0.25, 1) both;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* دخول متدرّج للعناصر الداخلية */
+.hero, .about, .actions .btn, .foot {
+  animation: fade-up 0.5s ease-out both;
+}
+.hero          { animation-delay: 0.08s; }
+.about         { animation-delay: 0.16s; }
+.actions .btn:nth-child(1) { animation-delay: 0.24s; }
+.actions .btn:nth-child(2) { animation-delay: 0.30s; }
+.actions .btn:nth-child(3) { animation-delay: 0.36s; }
+.foot          { animation-delay: 0.44s; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== الترويسة ===== */
+.hero {
+  margin-bottom: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.brand {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.brand-sub {
+  margin-top: 6px;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+.isuzu {
+  color: var(--isuzu);
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* الوسوم */
+.tags {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.tag {
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  padding: 5px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid;
+}
+.tag-rbc {
+  color: var(--rbc);
+  background: rgba(242, 52, 64, 0.08);
+  border-color: rgba(242, 52, 64, 0.4);
+  box-shadow: 0 0 0 rgba(242, 52, 64, 0);
+  animation: tag-glow-rbc 4s ease-in-out infinite;
+}
+.tag-srs {
+  color: var(--srs);
+  background: rgba(245, 197, 24, 0.08);
+  border-color: rgba(245, 197, 24, 0.4);
+  animation: tag-glow-srs 4s ease-in-out infinite 0.6s;
+}
+
+@keyframes tag-glow-rbc {
+  0%, 100% { box-shadow: 0 0 0 rgba(242, 52, 64, 0); }
+  50%      { box-shadow: 0 0 14px -2px rgba(242, 52, 64, 0.45); }
+}
+@keyframes tag-glow-srs {
+  0%, 100% { box-shadow: 0 0 0 rgba(245, 197, 24, 0); }
+  50%      { box-shadow: 0 0 14px -2px rgba(245, 197, 24, 0.45); }
+}
+
+/* ===== الوصف ===== */
+.about {
+  margin-bottom: 22px;
+}
+.about-lead {
+  font-size: 1rem;
+  line-height: 1.95;
+  color: #d5dbe4;
+}
+.about-lead b { color: #fff; font-weight: 700; }
+
+.hl-rbc { color: var(--rbc); font-weight: 800; letter-spacing: 1px; }
+.hl-srs { color: var(--srs); font-weight: 800; letter-spacing: 1px; }
+
+.about-note {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--card-border);
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: var(--text-dim);
+}
+.about-note b { color: var(--gold); }
+.isuzu-sm { color: var(--isuzu); font-weight: 700; }
+
+/* ===== الأزرار ===== */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: right;
+  text-decoration: none;
+  color: var(--text);
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  background: #21262f;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.btn:hover { background: #262c37; transform: translateY(-2px); }
+.btn:active { background: #2b323d; transform: translateY(0); }
+
+/* سهم يظهر بلطف عند المرور */
+.btn::after {
+  content: "‹";
+  margin-inline-start: auto;
+  font-size: 1.4rem;
+  color: var(--text-dim);
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.btn:hover::after { opacity: 1; transform: translateX(0); }
+
+.btn-icon {
+  flex-shrink: 0;
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.22);
+  transition: transform 0.15s ease;
+}
+.btn:hover .btn-icon { transform: scale(1.06); }
+.btn-text { display: flex; flex-direction: column; line-height: 1.35; }
+.btn-text b { font-size: 1rem; font-weight: 700; }
+.btn-text small { font-size: 0.82rem; color: var(--text-dim); font-weight: 500; }
+
+.btn-call:hover   { border-color: rgba(74, 144, 217, 0.6); }
+.btn-call .btn-icon { color: var(--blue); }
+
+.btn-whats:hover  { border-color: rgba(37, 211, 102, 0.6); }
+.btn-whats .btn-icon { color: var(--green); }
+
+.btn-map:hover    { border-color: rgba(215, 166, 63, 0.6); }
+.btn-map .btn-icon { color: var(--gold); }
+
+/* ===== التذييل ===== */
+.foot {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--card-border);
+}
+.foot p {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+}
+
+/* حالة التركيز للوصولية */
+.btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* ===== الاستجابة ===== */
+@media (max-width: 380px) {
+  .card { padding: 28px 18px 20px; }
+  .brand { font-size: 1.6rem; }
+}
+
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
